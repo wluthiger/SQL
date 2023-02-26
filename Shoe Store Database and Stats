@@ -1,0 +1,31 @@
+--Create a grocery store database
+
+create table STORE (ID integer primary key, BRAND text, NAME text, DESCRIPTION text, AISLE integer, PRICE integer);
+
+insert into STORE values (1, "Nike", "Monarch", "Great shoe for coaches", 1, 129.99);
+insert into STORE values (2, "Nike", "Air Jordan", "Great shoe for coaches", 2, 146.99);
+insert into STORE values (3, "Nike", "Ground Chuck", "Great shoe for coaches", 3, 80.99);
+insert into STORE values (4, "Nike", "Federer Special", "Great shoe for coaches", 4, 171.99);
+insert into STORE values (5, "Nike", "Julio My God", "Great shoe for coaches", 5, 166.99);
+insert into STORE values (6, "Nike", "Griffey Shuffle", "Great shoe for coaches", 6, 139.99);
+insert into STORE values (7, "Nike", "Monarch II", "Great shoe for coaches", 1, 154.99);
+insert into STORE values (8, "Nike", "Stage V", "Great shoe for coaches", 8, 64.99);
+insert into STORE values (9, "Nike", "El Presidente", "Great shoe for coaches", 9, 214.99);
+insert into STORE values (10, "Adidas", "Baller Prime", "Great shoe for coaches", 10, 83.99);
+insert into STORE values (11, "Adidas", "Stony Hawk", "Great shoe for coaches", 11, 61.99);
+insert into STORE values (12, "Adidas", "Kernel Sanders", "Great shoe for coaches", 12, 45.99);
+insert into STORE values (13, "Adidas", "Nadal Glide", "Great shoe for coaches", 13, 108.99);
+insert into STORE values (14, "Adidas", "TB12", "Great shoe for coaches", 14, 119.99);
+insert into STORE values (15, "Adidas", "Mr. Unlimited", "Great shoe for coaches", 15, 0.99);
+
+--display the database ordered by price
+select * from store order by price;
+
+--display average selling price
+select avg(price) from store
+
+--what are the 3 most 5 expensive items? 
+SELECT name, price
+FROM store
+order by price desc
+limit 3; 
