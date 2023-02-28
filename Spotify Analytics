@@ -1,0 +1,44 @@
+# For this project, I downloaded Spotify data from Kaggle.
+# Then I created a table to insert Spotify data into.
+# Finally, I performed analytics on the data using SQL. 
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#Then I inserted the Spotify Data .csv into the table.
+
+#Next, I explored the data using the following SQL. 
+
+#First I determined the popularity of the 10 longest songs in the table
+select artist_name,track_name,spotifydata.duration_ms/1000 as Song_Length_In_Seconds,popularity from spotifydata left join spotifydata data1 on (spotifydata.track_name=data1.track_name) 
+group by spotifydata.artist_name order by spotifydata.duration_ms desc
+limit 10
+
+#Then I determined the acousticness of the 10 shortest songs
+select artist_name,track_name,spotifydata.duration_ms/1000 as Song_Length_In_Seconds,acousticness as Acousticness from spotifydata left join spotifydata data1 on (spotifydata.track_name=data1.track_name) 
+group by spotifydata.artist_name order by Song_Length_In_Seconds asc
+limit 10
+
+#Then I determined the danceability of the 20 least popular songs
+select artist_name,track_name,spotifydata.popularity as Popularity,danceability as Danceability from spotifydata left join spotifydata data1 on (spotifydata.track_name=data1.track_name) 
+group by spotifydata.artist_name order by spotifydata.popularity asc
+limit 20
