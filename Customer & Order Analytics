@@ -23,3 +23,7 @@ select product,quantity,sum(quantity)*price as revenue from febsales where "loca
 
 #7. How many customers ordered more than 2 products at a time, and what was the average amount spent for those customers? 
 select count(distinct acctnum),avg(quantity*price) from FebSales left join customers on febsales.orderid=customers.order_id where Quantity>=3 and orderid<>'Order ID' and "orderid"<>'' and "orderid" is not null and length(orderid)=6
+
+
+#8. List all the products sold in Los Angeles in February, and include how many of each were sold.
+select "product",sum("quantity") from febsales where "location" like '%Los Angeles,%' group by product
