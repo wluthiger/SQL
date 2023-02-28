@@ -25,5 +25,27 @@ select product,quantity,sum(quantity)*price as revenue from febsales where "loca
 select count(distinct acctnum),avg(quantity*price) from FebSales left join customers on febsales.orderid=customers.order_id where Quantity>=3 and orderid<>'Order ID' and "orderid"<>'' and "orderid" is not null and length(orderid)=6
 
 
-#8. List all the products sold in Los Angeles in February, and include how many of each were sold.
+List all the products sold in Los Angeles in February, and include how many of each were sold.
 select "product",sum("quantity") from febsales where "location" like '%Los Angeles,%' group by product
+
+
+Which locations in New York received at least 3 orders in January, and how many orders did they each receive?
+select "location",sum("quantity") as Total_orders from jansales where "location" like '%, NY %' group by "location" having Total_orders>2
+
+
+How many of each type of headphone were sold in February?
+select "product",sum("quantity") as "total_headphones" from febsales where "product" like '%Headphone%' group by "product"
+
+
+What was the average amount spent per account in February?
+select sum("price"*"quantity")/count(customers.acctnum) from febsales left join customers on febsales.orderid=customers.order_id where "orderid" is not null and "orderid"<>'' and "orderid"<>'Order ID'
+
+
+What was the average quantity of products purchased per account in February?
+select sum("quantity")/count(customers.acctnum) from febsales left join customers on febsales.orderid=customers.order_id where "orderid" is not null and "orderid"<>'' and "orderid"<>'Order ID'
+
+
+Which product brought in the most revenue in January and how much revenue did it bring in total?
+select product,sum("quantity"*"price") as "total_revenue" from jansales group by product order by "total_revenue" desc limit 1
+
+
