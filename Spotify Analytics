@@ -42,3 +42,9 @@ limit 10
 select artist_name,track_name,spotifydata.popularity as Popularity,danceability as Danceability from spotifydata left join spotifydata data1 on (spotifydata.track_name=data1.track_name) 
 group by spotifydata.artist_name order by spotifydata.popularity asc
 limit 20
+
+#Calculate popularity for each artist, and tagging only artists with greater than or equal to 90 popularity rating
+with topartists as 
+(select spotifydata.artist_name,spotifydata.track_name,spotifydata.duration_ms,avg(spotifydata.popularity) as Avg_Artist_Popularity from spotifydata left join spotifydata data1 on (spotifydata.track_name=data1.track_name) 
+group by spotifydata.artist_name order by Avg_Artist_Popularity desc)
+select artist_name,Avg_Artist_Popularity, 'Top Star' as tag from topartists where Avg_Artist_Popularity>=90
